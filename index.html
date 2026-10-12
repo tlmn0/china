@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Как заказать вещи с Poizon, Taobao и Pinduoduo: где смотреть, размеры, белая доставка или карго, калькулятор и заявка в Telegram @Tlmn0.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Заказы из Китая">
+<meta property="og:description" content="Где смотреть, как выбрать размер и что выйдет дешевле: белая доставка или карго. Заявка в Telegram @Tlmn0.">
+<meta name="theme-color" content="#F2F3EE">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Заказы из Китая</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Unbounded:wght@500;700&display=swap">
+<style>
+/* Layout: one narrow column dressed as a shipping waybill; sticky chip nav; each section is a labelled compartment with its Chinese term */
+:root{
+  --paper:#F2F3EE; --card:#FFFFFF; --ink:#1B1F23; --muted:#5B635D; --line:#D6D9D0;
+  --seal:#B3302A; --tape:#C99A4B; --wd:#1B7462; --cg:#2D4D85;
+  --t-wd:#E1EFE9; --t-cg:#E3E9F4; --t-seal:#F5E2DF; --t-tape:#F2E6CC;
+  --f-display:"Unbounded","Golos Text",system-ui,sans-serif;
+  --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --f-hz:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#14171A; --card:#1D2125; --ink:#E8EBE5; --muted:#A1A9A2; --line:#343A40;
+    --seal:#E2675D; --tape:#D7B06A; --wd:#4DC0A1; --cg:#88A8E2;
+    --t-wd:#173029; --t-cg:#1C263B; --t-seal:#3A1E1C; --t-tape:#342B1B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14171A; --card:#1D2125; --ink:#E8EBE5; --muted:#A1A9A2; --line:#343A40;
+  --seal:#E2675D; --tape:#D7B06A; --wd:#4DC0A1; --cg:#88A8E2;
+  --t-wd:#173029; --t-cg:#1C263B; --t-seal:#3A1E1C; --t-tape:#342B1B;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px}
+.hz{font-family:var(--f-hz);font-weight:500}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.small{font-size:.875rem}
+.muted{color:var(--muted)}
+a{color:inherit}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2.5px solid var(--cg);outline-offset:2px;border-radius:6px}
+
+/* ---------- hero waybill ---------- */
+.hero{padding-block:20px 8px}
+.label{position:relative;background:var(--card);border:1.5px solid var(--ink);border-radius:8px;overflow:hidden}
+.label::before{content:"";position:absolute;left:-18px;top:14px;width:110px;height:22px;background:var(--tape);opacity:.55;transform:rotate(-24deg)}
+.label-row{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;padding:14px 92px 12px 16px;border-bottom:1.5px dashed var(--line);position:relative}
+.kv{display:flex;gap:6px;align-items:baseline}
+.k{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.v{font-weight:600}
+.label-body{padding:18px 16px 16px;display:grid;gap:14px}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(1.85rem,7.4vw,2.7rem);line-height:1.08;letter-spacing:-.01em}
+.lede{font-size:1.05rem;max-width:56ch}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:8px;font-weight:600;text-decoration:none;border:1.5px solid var(--ink);cursor:pointer;background:transparent}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-sm{min-height:38px;padding:7px 12px;font-size:.9rem}
+.label-foot{border-top:1.5px dashed var(--line);padding:12px 16px 14px;display:grid;gap:6px}
+.barcode{height:34px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px,var(--ink) 8px 11px,transparent 11px 12px,var(--ink) 12px 13px,transparent 13px 16px,var(--ink) 16px 17px,transparent 17px 19px)}
+.seal{position:absolute;top:10px;right:12px;width:66px;height:66px;border:2.5px solid var(--seal);border-radius:50%;display:grid;place-items:center;color:var(--seal);font-family:var(--f-hz);font-weight:700;font-size:1.05rem;letter-spacing:.06em;transform:rotate(-12deg);opacity:.9;line-height:1.1;text-align:center}
+.seal small{display:block;font-family:var(--f-body);font-size:.5rem;letter-spacing:.08em;font-weight:600}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;font-size:.88rem;font-weight:500;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+
+/* ---------- sections ---------- */
+.sec{padding-block:34px 6px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.sec > *,.calc > *,.label-body > *{min-width:0}
+.eyebrow{display:flex;gap:8px;align-items:baseline;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.eyebrow .hz{font-size:1rem;letter-spacing:.04em;color:var(--seal);text-transform:none}
+h2{font-family:var(--f-display);font-weight:700;font-size:1.38rem;line-height:1.2}
+h3{font-size:1.05rem;font-weight:600}
+.intro{max-width:62ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:40px 1fr;gap:12px;padding-block:14px;border-top:1px dashed var(--line)}
+.steps li:first-child{border-top:0;padding-top:4px}
+.steps li::before{counter-increment:s;content:counter(s);font-family:var(--f-mono);font-weight:700;width:34px;height:34px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:.95rem}
+.steps p{color:var(--muted);margin-top:2px}
+.steps b{color:var(--ink)}
+
+/* chips & picker */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 13px;cursor:pointer;font-size:.92rem;line-height:1.25;text-align:left}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pick-out{display:grid;gap:10px;border-left:3px solid var(--seal)}
+.pick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.pick-grid > div{min-width:0}
+.pill{display:inline-block;font-size:.8rem;font-weight:600;padding:2px 9px;border-radius:999px}
+.pill-wd{background:var(--t-wd);color:var(--wd)}
+.pill-cg{background:var(--t-cg);color:var(--cg)}
+.pill-seal{background:var(--t-seal);color:var(--seal)}
+.pill-tape{background:var(--t-tape);color:var(--ink)}
+
+/* tabs */
+.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1.5px solid var(--ink);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;border:1.5px solid transparent;border-bottom:0;background:none;padding:9px 12px 8px;border-radius:8px 8px 0 0;cursor:pointer;font-weight:600;display:flex;gap:6px;align-items:baseline;margin-bottom:-1.5px}
+.tab .hz{font-size:.85rem;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--card);border-color:var(--ink);border-bottom:1.5px solid var(--card)}
+.panel{background:var(--card);border:1.5px solid var(--ink);border-top:0;border-radius:0 0 10px 10px;padding:16px;display:grid;gap:12px}
+.rows{display:grid;gap:0}
+.rows > div{display:grid;grid-template-columns:minmax(92px,28%) 1fr;gap:12px;padding-block:9px;border-top:1px dashed var(--line)}
+.rows > div:first-child{border-top:0;padding-top:0}
+.rows dt{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.rows dd{margin:0;min-width:0}
+.warn{background:var(--t-seal);border-radius:8px;padding:10px 12px;font-size:.93rem}
+.tip{background:var(--t-tape);border-radius:8px;padding:10px 12px;font-size:.93rem}
+
+/* dictionary */
+.dict{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px}
+.word{display:grid;gap:2px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;position:relative;min-width:0}
+.word .hz{font-size:1.3rem;line-height:1.25}
+.word span:last-child{font-size:.88rem;color:var(--muted)}
+.word.ok{border-color:var(--wd)}
+.word.ok::after{content:"скопировано";position:absolute;top:8px;right:10px;font-size:.7rem;color:var(--wd);font-weight:600}
+.combo{display:flex;flex-wrap:wrap;gap:8px}
+.combo button{border:1.5px dashed var(--ink);background:none;border-radius:8px;padding:7px 11px;cursor:pointer;text-align:left}
+.combo .hz{font-size:1.02rem}
+
+/* sizes */
+.measure{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.measure .card{display:grid;gap:6px}
+.measure ul{margin:0;padding-left:18px;color:var(--muted)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
+thead th{border-top:0;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+td .hz{font-size:1.08rem}
+.yes{color:var(--wd);font-weight:600}
+.no{color:var(--seal);font-weight:600}
+.ask{color:var(--muted);font-weight:500}
+
+/* delivery compare */
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.dcard{border-radius:10px;padding:16px;display:grid;gap:10px;border:1.5px solid}
+.dcard.wd{border-color:var(--wd);background:var(--card)}
+.dcard.cg{border-color:var(--cg);background:var(--card)}
+.dhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.dcard.wd h3{color:var(--wd)} .dcard.cg h3{color:var(--cg)}
+.dcard h3{font-family:var(--f-display);font-weight:700;font-size:1.08rem}
+
+/* calculator */
+.calc{display:grid;gap:14px}
+.items{display:grid;gap:0}
+.it{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding-block:7px;border-top:1px dashed var(--line)}
+.it:first-child{border-top:0}
+.it-name{min-width:0}
+.it-name small{display:block;color:var(--muted);font-family:var(--f-mono);font-size:.74rem}
+.step{display:flex;align-items:center;gap:4px}
+.step button{width:36px;height:36px;border-radius:8px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer;font-size:1.1rem;line-height:1}
+.step output{min-width:28px;text-align:center;font-family:var(--f-mono);font-weight:700}
+.toggle{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.toggle input{width:20px;height:20px;margin-top:2px;accent-color:var(--cg);flex:none}
+.total{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;padding-top:10px;border-top:1.5px solid var(--ink)}
+.total .mono{font-size:1.35rem;font-weight:700}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.res > div{border-radius:10px;padding:14px;display:grid;gap:4px;min-width:0}
+.res .r-wd{background:var(--t-wd)} .res .r-cg{background:var(--t-cg)}
+.res .lbl{font-weight:600}
+.r-wd .lbl{color:var(--wd)} .r-cg .lbl{color:var(--cg)}
+.res .sum{font-family:var(--f-mono);font-size:1.4rem;font-weight:700;font-variant-numeric:tabular-nums}
+.res .sub{font-size:.85rem;color:var(--muted)}
+.verdict{border-left:3px solid var(--seal);padding:2px 0 2px 12px;font-weight:500}
+.chart{display:grid;gap:6px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.85rem;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+svg text{font-family:var(--f-mono);font-size:10px}
+.ax{fill:var(--muted)}
+.grid{stroke:var(--line);stroke-width:1}
+.l-wd{stroke:var(--wd);stroke-width:2.5;fill:none}
+.b-wd{fill:var(--wd);opacity:.14}
+.l-cg{stroke:var(--cg);stroke-width:2.5;fill:none}
+.mark{stroke:var(--seal);stroke-width:1.5;stroke-dasharray:3 3}
+.mark-t{fill:var(--seal);font-weight:700}
+.foot{font-size:.82rem;color:var(--muted)}
+
+/* order builder */
+.form{display:grid;gap:12px}
+.f2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.field{display:grid;gap:5px;min-width:0}
+.field label{font-weight:600;font-size:.92rem}
+.field small{color:var(--muted);font-size:.8rem}
+input[type=text],textarea,select{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:8px;padding:10px 12px}
+textarea{min-height:96px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--cg)}
+.preview{position:relative;background:var(--card);border:1.5px dashed var(--ink);border-radius:10px;padding:16px;white-space:pre-wrap;font-size:.95rem;word-break:break-word}
+.preview .badge{position:absolute;top:-11px;left:12px;background:var(--paper);padding:0 6px;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.status{font-size:.88rem;color:var(--wd);font-weight:600;min-height:1.2em}
+
+/* faq */
+.faq{display:grid;gap:8px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px}
+summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-mono);font-weight:700;color:var(--muted)}
+details[open] summary::after{content:"−"}
+details > div{padding:0 16px 14px;color:var(--muted);display:grid;gap:8px}
+
+/* footer */
+footer{margin-top:40px;border-top:1.5px solid var(--ink);padding-block:22px 34px}
+.fbox{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.qr{width:112px;height:112px;background:#fff;padding:8px;border-radius:6px;border:1px solid var(--line);flex:none}
+.qr svg{display:block;width:100%;height:100%}
+.fbox > div{min-width:0;display:grid;gap:6px;flex:1 1 220px}
+.handle{font-family:var(--f-display);font-weight:700;font-size:1.3rem}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header class="hero">
+  <div class="label">
+    <div class="label-row">
+      <div class="kv"><span class="k">Откуда</span><span class="v"><span class="hz">深圳</span> Шэньчжэнь</span></div>
+      <div class="kv"><span class="k">Куда</span><span class="v">Россия</span></div>
+      <div class="kv"><span class="k">Кому</span><span class="v">вам</span></div>
+      <div class="seal" aria-hidden="true"><div>验货<small>ПРОВЕРЕНО</small></div></div>
+    </div>
+    <div class="label-body">
+      <h1>Заказы из Китая</h1>
+      <p class="lede">Как найти вещь на Poizon, Taobao или Pinduoduo, прислать её мне и получить в России. Белой доставкой, если вещей немного, или карго, если заказ большой.</p>
+      <div class="cta">
+        <a class="btn btn-ink" href="https://t.me/Tlmn0" target="_blank" rel="noopener">Написать в Telegram</a>
+        <a class="btn" href="#delivery">Посчитать доставку</a>
+      </div>
+    </div>
+    <div class="label-foot">
+      <div class="barcode" aria-hidden="true"></div>
+      <div class="mono small muted">@TLMN0 · ВЫКУП · ПРОВЕРКА · ДОСТАВКА · ОКТЯБРЬ 2026</div>
+    </div>
+  </div>
+</header>
+</div>
+
+<nav class="nav" aria-label="Разделы">
+  <div class="wrap nav-in">
+    <a href="#how">Как это работает</a>
+    <a href="#where">Где смотреть</a>
+    <a href="#words">Словарик</a>
+    <a href="#sizes">Размеры</a>
+    <a href="#delivery">Доставка</a>
+    <a href="#rules">Что везём</a>
+    <a href="#order">Заявка</a>
+    <a href="#faq">Вопросы</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- HOW -->
+<section class="sec" id="how">
+  <p class="eyebrow"><span class="hz">流程</span>порядок заказа</p>
+  <h2>Как это работает</h2>
+  <ol class="steps">
+    <li><div><b>Присылаете, что хотите</b><p>Ссылку, скрин или просто фото вещи. Сразу напишите размер, цвет и количество.</p></div></li>
+    <li><div><b>Я считаю цену</b><p>Товар в рублях по курсу дня, доставка по Китаю и моя услуга. Вы получаете одну сумму и подсказку, какая доставка выйдет дешевле.</p></div></li>
+    <li><div><b>Вы оплачиваете товар</b><p>100% предоплата. Выкупаю только после оплаты.</p></div></li>
+    <li><div><b>Выкупаю и проверяю</b><p>Продавец отправляет заказ на склад в Китае. Там вещь фотографируют, и я сверяю: то ли пришло и нет ли брака.</p></div></li>
+    <li><div><b>Отправляю в Россию</b><p>Белая доставка оплачивается после взвешивания на складе и едет до пункта выдачи в вашем городе. Карго оплачивается при получении в Москве.</p></div></li>
+  </ol>
+</section>
+
+<!-- WHERE -->
+<section class="sec" id="where">
+  <p class="eyebrow"><span class="hz">平台</span>площадки</p>
+  <h2>Где смотреть</h2>
+  <p class="intro">Выберите, что ищете, и я подскажу, где это лучше брать и как везти.</p>
+  <div class="chips" id="pick" role="group" aria-label="Что ищете"></div>
+  <div class="card pick-out" id="pickOut" aria-live="polite"></div>
+
+  <div>
+    <div class="tabs" role="tablist" aria-label="Площадки" id="tabs"></div>
+    <div id="panels"></div>
+  </div>
+</section>
+
+<!-- WORDS -->
+<section class="sec" id="words">
+  <p class="eyebrow"><span class="hz">词典</span>словарик</p>
+  <h2>Слова для поиска на Taobao и Pinduoduo</h2>
+  <p class="intro">Нажмите на слово, оно скопируется. Вставьте его в поиск приложения. Слова можно складывать через пробел: сначала для кого, потом что, потом уточнение.</p>
+  <div class="combo" id="combos" aria-label="Готовые запросы"></div>
+  <div class="chips" id="dictFilter" role="group" aria-label="Категории"></div>
+  <div class="dict" id="dict"></div>
+</section>
+
+<!-- SIZES -->
+<section class="sec" id="sizes">
+  <p class="eyebrow"><span class="hz">尺码</span>размеры</p>
+  <h2>Как не ошибиться с размером</h2>
+  <p class="intro">Китайские вещи часто маломерят, M в китайском магазине бывает как наша S. Поэтому размер выбираем по сантиметрам, а не по букве. Пришлите замеры, и я сверю их с таблицей продавца.</p>
+  <div class="measure">
+    <div class="card"><h3>Верх</h3><p class="small muted">Худи, свитер, футболка, куртка</p><ul class="small"><li>ширина по груди: вещь лёжа, от подмышки до подмышки</li><li>длина по спине</li><li>длина рукава</li></ul></div>
+    <div class="card"><h3>Низ</h3><p class="small muted">Джинсы, брюки, юбка</p><ul class="small"><li>талия</li><li>бёдра</li><li>длина по внутреннему шву</li></ul></div>
+    <div class="card"><h3>Обувь</h3><p class="small muted">Кроссовки, ботинки</p><ul class="small"><li>длина стопы в см: встаньте на лист бумаги и отметьте пятку и самый длинный палец</li><li>ваш привычный размер EU</li></ul></div>
+  </div>
+  <p class="tip">Проще всего измерить вашу любимую вещь, которая хорошо сидит. Если замерить не получается, напишите рост, вес и как любите носить: по фигуре или свободно.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>В таблице продавца</th><th>Что значит</th><th>Как сверять</th></tr></thead>
+      <tbody>
+        <tr><td><span class="hz">胸围</span></td><td>обхват груди вещи</td><td>ширина вещи лёжа × 2</td></tr>
+        <tr><td><span class="hz">衣长</span></td><td>длина изделия</td><td>от плеча до низа</td></tr>
+        <tr><td><span class="hz">袖长</span></td><td>длина рукава</td><td>от плечевого шва до манжеты</td></tr>
+        <tr><td><span class="hz">腰围</span></td><td>обхват талии</td><td>ширина пояса лёжа × 2</td></tr>
+        <tr><td><span class="hz">臀围</span></td><td>обхват бёдер</td><td>ширина в бёдрах лёжа × 2</td></tr>
+        <tr><td><span class="hz">裤长</span></td><td>длина брюк</td><td>от пояса до низа</td></tr>
+        <tr><td><span class="hz">脚长</span></td><td>длина стопы</td><td>ваша стопа в см</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- DELIVERY -->
+<section class="sec" id="delivery">
+  <p class="eyebrow"><span class="hz">物流</span>доставка</p>
+  <h2>Белая доставка или карго</h2>
+  <p class="intro">Белая доставка удобна, когда вещей немного или нужна косметика: посылка приходит в ваш город. Карго считает по весу дешевле, но берёт минимум 10 кг и выдаёт груз только в Москве. Поэтому оно выгодно на большом заказе.</p>
+
+  <div class="compare">
+    <div class="dcard wd">
+      <div class="dhead"><h3>Белая доставка</h3><span class="pill pill-wd">официально</span></div>
+      <dl class="rows">
+        <div><dt>Для чего</dt><dd>1–10 вещей, косметика, духи, брендовые оригиналы</dd></div>
+        <div><dt>Цена</dt><dd><span class="mono">≈ 680 ₽/кг</span> плюс доставка по России до пункта выдачи, обычно <span class="mono">500–1&nbsp;500 ₽</span></dd></div>
+        <div><dt>Срок</dt><dd><span class="mono">3–5 недель</span></dd></div>
+        <div><dt>Получение</dt><dd>пункт выдачи в вашем городе</dd></div>
+        <div><dt>Оплата</dt><dd>после взвешивания на складе в Китае</dd></div>
+        <div><dt>Таможня</dt><dd>посылка оформляется на ваше имя, нужны паспортные данные. Без пошлины до 200 € (≈&nbsp;19&nbsp;000&nbsp;₽) на один заказ. Не больше 3 одинаковых вещей на человека.</dd></div>
+      </dl>
+    </div>
+    <div class="dcard cg">
+      <div class="dhead"><h3>Карго</h3><span class="pill pill-cg">большие заказы</span></div>
+      <dl class="rows">
+        <div><dt>Для чего</dt><dd>много одежды, обуви, вещей для дома, примерно от 5 кг</dd></div>
+        <div><dt>Цена</dt><dd><span class="mono">≈ 3 $/кг</span> (около 255 ₽), вещи с логотипами брендов <span class="mono">≈ 3,5 $/кг</span>. Минимум 10 кг. При выдаче <span class="mono">600 ₽</span> за каждое место (коробку).</dd></div>
+        <div><dt>Срок</dt><dd><span class="mono">4–6 недель</span></dd></div>
+        <div><dt>Получение</dt><dd>самовывоз, рынок «Южные ворота», Москва, 19 км МКАД. В другой город пересылаем транспортной компанией, договариваемся заранее.</dd></div>
+        <div><dt>Оплата</dt><dd>при получении, картой или наличными</dd></div>
+        <div><dt>Таможня</dt><dd>уже включена в цену</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="card calc">
+    <div class="dhead"><h3>Что выйдет дешевле</h3><span class="pill pill-tape" id="calcBadge">пример заказа</span></div>
+    <p class="small muted">Отметьте, сколько вещей хотите. Вес считается примерно, с упаковкой.</p>
+    <div class="items" id="items"></div>
+    <label class="toggle"><input type="checkbox" id="brand"><span><b>Вещи с логотипами брендов</b><br><span class="small muted">Карго считает их по повышенной ставке</span></span></label>
+    <div class="total"><span>Примерный вес</span><span class="mono" id="wOut">0 кг</span></div>
+    <div class="res">
+      <div class="r-wd"><span class="lbl">Белая доставка</span><span class="sum" id="wdSum">—</span><span class="sub" id="wdSub"></span></div>
+      <div class="r-cg"><span class="lbl">Карго</span><span class="sum" id="cgSum">—</span><span class="sub" id="cgSub"></span></div>
+    </div>
+    <p class="verdict" id="verdict" aria-live="polite"></p>
+    <div class="chart">
+      <div class="legend"><span><i style="background:var(--wd)"></i>белая доставка</span><span><i style="background:var(--cg)"></i>карго</span><span><i style="background:var(--seal)"></i>ваш заказ</span></div>
+      <svg id="chart" viewBox="0 0 360 214" role="img" aria-label="Стоимость доставки в зависимости от веса заказа"></svg>
+    </div>
+    <p class="foot">Ориентир на октябрь 2026, без учёта стоимости товара. Белая: 680 ₽/кг (каждый заказ от продавца минимум 300 г) и доставка по России 500–1&nbsp;500 ₽. Карго: 3 $/кг или 3,5 $/кг за вещи с логотипами, курс ЦБ 84,90 ₽ за доллар на 10.10.2026, минимум 10 кг, упаковка ≈ 270 ₽ и выдача 600 ₽ за каждое место до 30 кг. Ставки меняются, точную сумму подтверждаю перед отправкой.</p>
+  </div>
+
+  <div class="tip"><b>Сборная посылка.</b> Если заказ меньше 10 кг, его можно добавить в общую отправку вместе с заказами знакомых. Тогда минимум 10 кг делится на всех, а забирает груз один человек. Минус один: придётся подождать, пока соберётся отправка.</div>
+</section>
+
+<!-- RULES -->
+<section class="sec" id="rules">
+  <p class="eyebrow"><span class="hz">能寄吗</span>что можно везти</p>
+  <h2>Что везём</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Товар</th><th>Белая доставка</th><th>Карго</th></tr></thead>
+      <tbody>
+        <tr><td>Одежда, обувь, сумки</td><td class="yes">да</td><td class="yes">да</td></tr>
+        <tr><td>Вещи с логотипами брендов</td><td class="yes">да, до 3 одинаковых</td><td class="yes">да, по ставке ≈ 3,5 $/кг</td></tr>
+        <tr><td>Косметика, кремы</td><td class="yes">да</td><td class="ask">уточняю</td></tr>
+        <tr><td>Духи</td><td class="yes">да, только наземным тарифом, это дольше</td><td class="ask">уточняю</td></tr>
+        <tr><td>Автозапчасти для своей машины</td><td class="yes">да, кроме двигателей</td><td class="ask">уточняю</td></tr>
+        <tr><td>Техника с аккумулятором, пауэрбанки</td><td class="ask">уточняю</td><td class="ask">уточняю</td></tr>
+        <tr><td>Еда, чай, сладости</td><td class="no">нет</td><td class="ask">уточняю</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">«Уточняю» значит, что я спрошу перевозчика до покупки и только потом выкуплю.</p>
+</section>
+
+<!-- ORDER -->
+<section class="sec" id="order">
+  <p class="eyebrow"><span class="hz">下单</span>заявка</p>
+  <h2>Отправить заявку</h2>
+  <p class="intro">Заполните, что знаете. Текст соберётся сам: скопируйте его и отправьте мне в Telegram вместе с фото или ссылками.</p>
+  <form class="form" id="orderForm" autocomplete="off">
+    <div class="field">
+      <label for="o-what">Что хотите заказать</label>
+      <textarea id="o-what" placeholder="Худи серое, ссылка с Taobao&#10;Кроссовки New Balance 530, скрин с Poizon"></textarea>
+      <small>Каждая вещь с новой строки: ссылка, название или «фото пришлю»</small>
+    </div>
+    <div class="f2">
+      <div class="field"><label for="o-size">Размер и цвет</label><input type="text" id="o-size" placeholder="M, серый; обувь 39 EU"></div>
+      <div class="field"><label for="o-qty">Количество</label><input type="text" id="o-qty" placeholder="по 1 шт."></div>
+      <div class="field"><label for="o-city">Город получения</label><input type="text" id="o-city" placeholder="Электросталь"></div>
+      <div class="field"><label for="o-ship">Доставка</label>
+        <select id="o-ship"><option>Подскажите, что выгоднее</option><option>Белая доставка</option><option>Карго</option><option>Сборная посылка</option></select>
+      </div>
+      <div class="field"><label for="o-date">Когда нужно</label><input type="text" id="o-date" placeholder="не срочно / к 25 декабря"></div>
+      <div class="field"><label for="o-name">Ваше имя</label><input type="text" id="o-name" placeholder="Светлана"></div>
+    </div>
+  </form>
+  <div class="preview" id="preview"><span class="badge" id="pvBadge">пример</span><span id="pvText"></span></div>
+  <div class="cta">
+    <button class="btn btn-ink" type="button" id="copyOrder">Скопировать текст</button>
+    <a class="btn" href="https://t.me/Tlmn0" target="_blank" rel="noopener">Открыть Telegram @Tlmn0</a>
+    <button class="btn btn-sm" type="button" id="clearOrder">Очистить</button>
+  </div>
+  <p class="status" id="copyStatus" aria-live="polite"></p>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <p class="eyebrow"><span class="hz">问答</span>вопросы</p>
+  <h2>Частые вопросы</h2>
+  <div class="faq">
+    <details><summary>Это оригинал?</summary><div><p>Брендовые вещи беру на Poizon: там каждую вещь проверяют на подлинность перед отправкой.</p><p>На Taobao и Pinduoduo известный бренд по цене масс-маркета почти всегда не оригинал. Их сильная сторона другая: хорошая одежда и вещи без логотипов по низкой цене.</p></div></details>
+    <details><summary>Сколько стоит ваша услуга?</summary><div><p>Она входит в расчёт, который я присылаю до оплаты. Вы сразу видите итоговую сумму за товар, без доплат потом. Доставка в Россию считается отдельно.</p></div></details>
+    <details><summary>Как оплатить?</summary><div><p>Переводом, реквизиты пришлю в Telegram вместе с расчётом. Товар оплачивается полностью до выкупа. Белая доставка оплачивается мне после взвешивания, карго оплачивается при получении в Москве.</p></div></details>
+    <details><summary>Можно вернуть или обменять?</summary><div><p>Пока вещь в Китае, брак или не ту вещь возвращаем продавцу, если магазин принимает возврат. Для этого склад и фотографирует заказ до отправки.</p><p>После отправки в Россию вернуть уже нельзя, поэтому размеры сверяем заранее.</p></div></details>
+    <details><summary>Почему цена со скрина может измениться?</summary><div><p>Цены и наличие в Китае меняются каждый день, курс юаня тоже. Перед оплатой подтверждаю актуальную цену.</p></div></details>
+    <details><summary>Почему доставка оплачивается отдельно?</summary><div><p>Точный вес видно только на складе в Китае. Заранее называю ориентир, точную сумму после взвешивания.</p></div></details>
+    <details><summary>Сколько ждать?</summary><div><p>Белая доставка 3–5 недель, карго 4–6 недель. Сроки с запасом. В китайские праздники (первая неделя октября и китайский Новый год) склады отправляют с задержкой.</p></div></details>
+    <details><summary>Можно заказать на нескольких человек?</summary><div><p>Да. Каждому считаю отдельно, а отправить можно одной посылкой. В белой доставке каждый оформляется на своё имя, и лимиты (200 € на заказ и 3 одинаковые вещи) считаются на каждого.</p></div></details>
+  </div>
+</section>
+
+<footer>
+  <div class="fbox">
+    <div class="qr" aria-label="QR-код на Telegram @Tlmn0" role="img"><svg viewBox="-1 -1 27 27" shape-rendering="crispEdges"><path fill="#111" d="M0 0h7v1h-7zM8 0h2v1h-2zM11 0h3v1h-3zM15 0h1v1h-1zM18 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h2v1h-2zM12 1h3v1h-3zM18 1h1v1h-1zM24 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM12 2h1v1h-1zM18 2h1v1h-1zM20 2h3v1h-3zM24 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h2v1h-2zM16 3h1v1h-1zM18 3h1v1h-1zM20 3h3v1h-3zM24 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h2v1h-2zM11 4h1v1h-1zM14 4h3v1h-3zM18 4h1v1h-1zM20 4h3v1h-3zM24 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM16 5h1v1h-1zM18 5h1v1h-1zM24 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h7v1h-7zM8 7h1v1h-1zM11 7h3v1h-3zM15 7h1v1h-1zM0 8h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM11 8h1v1h-1zM13 8h1v1h-1zM15 8h1v1h-1zM17 8h5v1h-5zM24 8h1v1h-1zM0 9h1v1h-1zM2 9h2v1h-2zM8 9h1v1h-1zM13 9h4v1h-4zM19 9h3v1h-3zM23 9h1v1h-1zM0 10h5v1h-5zM6 10h1v1h-1zM10 10h1v1h-1zM15 10h2v1h-2zM18 10h1v1h-1zM21 10h2v1h-2zM0 11h2v1h-2zM5 11h1v1h-1zM8 11h1v1h-1zM10 11h1v1h-1zM12 11h1v1h-1zM14 11h2v1h-2zM17 11h3v1h-3zM22 11h2v1h-2zM6 12h1v1h-1zM9 12h1v1h-1zM11 12h1v1h-1zM13 12h3v1h-3zM17 12h2v1h-2zM21 12h4v1h-4zM0 13h1v1h-1zM5 13h1v1h-1zM7 13h2v1h-2zM10 13h1v1h-1zM12 13h1v1h-1zM15 13h2v1h-2zM20 13h1v1h-1zM23 13h1v1h-1zM2 14h8v1h-8zM11 14h6v1h-6zM18 14h5v1h-5zM8 15h2v1h-2zM11 15h1v1h-1zM13 15h1v1h-1zM15 15h1v1h-1zM19 15h2v1h-2zM22 15h2v1h-2zM0 16h2v1h-2zM6 16h2v1h-2zM9 16h2v1h-2zM12 16h2v1h-2zM16 16h7v1h-7zM8 17h1v1h-1zM10 17h1v1h-1zM13 17h4v1h-4zM20 17h1v1h-1zM0 18h7v1h-7zM8 18h1v1h-1zM15 18h2v1h-2zM18 18h1v1h-1zM20 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM9 19h1v1h-1zM12 19h1v1h-1zM14 19h1v1h-1zM16 19h1v1h-1zM20 19h5v1h-5zM0 20h1v1h-1zM2 20h3v1h-3zM6 20h1v1h-1zM8 20h2v1h-2zM11 20h1v1h-1zM13 20h2v1h-2zM16 20h7v1h-7zM24 20h1v1h-1zM0 21h1v1h-1zM2 21h3v1h-3zM6 21h1v1h-1zM10 21h1v1h-1zM12 21h1v1h-1zM15 21h5v1h-5zM22 21h3v1h-3zM0 22h1v1h-1zM2 22h3v1h-3zM6 22h1v1h-1zM9 22h6v1h-6zM17 22h2v1h-2zM21 22h1v1h-1zM23 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h1v1h-1zM11 23h1v1h-1zM13 23h1v1h-1zM15 23h1v1h-1zM19 23h5v1h-5zM0 24h7v1h-7zM8 24h2v1h-2zM12 24h2v1h-2zM17 24h2v1h-2zM22 24h3v1h-3z"/></svg></div>
+    <div>
+      <span class="k">Заказы и вопросы</span>
+      <a class="handle" href="https://t.me/Tlmn0" target="_blank" rel="noopener">@Tlmn0</a>
+      <p class="small muted">Telegram. Октябрь 2026. Цены, курсы и ставки доставки меняются, точную сумму подтверждаю перед оплатой.</p>
+    </div>
+  </div>
+</footer>
+</main>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/ /g,' ');
+const rub=n=>fmt(Math.round(n/10)*10)+' ₽';
+
+/* ---------- copy helper ---------- */
+function copyText(text){
+  return new Promise(res=>{
+    try{
+      navigator.clipboard.writeText(text).then(()=>res(true),()=>res(fallback(text)));
+    }catch(e){res(fallback(text));}
+  });
+}
+function fallback(text){
+  const ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');
+  ta.style.position='fixed';ta.style.top='0';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+  let ok=false;try{ok=document.execCommand('copy');}catch(e){}ta.remove();return ok;
+}
+
+/* ---------- picker ---------- */
+const PICKS=[
+ {k:'Брендовые кроссовки и одежда',where:'Poizon',ship:'1–3 вещи белой доставкой, больше карго',note:'Poizon проверяет подлинность каждой вещи. Размер обуви пишите по EU или в сантиметрах.',tab:'poizon'},
+ {k:'Одежда без бренда',where:'Taobao, Pinduoduo',ship:'примерно от 5 кг выгоднее карго',note:'Ищите по фото или словами из словарика ниже. Размер сверяем по сантиметрам.',tab:'taobao'},
+ {k:'Косметика и духи',where:'Poizon',ship:'только белая доставка',note:'Не больше 3 одинаковых средств на человека за раз. Духи едут наземным тарифом, это дольше.',tab:'poizon'},
+ {k:'Мелочи для дома',where:'Pinduoduo, Taobao',ship:'вместе с другими вещами',note:'Каждый мелкий заказ от продавца считается минимум как 300 г, поэтому мелочь выгоднее отправлять вместе с остальным.',tab:'pdd'},
+ {k:'Много одинаковых вещей',where:'1688',ship:'карго',note:'Оптовые цены от фабрик, но у большинства товаров есть минимальная партия.',tab:'1688'},
+ {k:'Автозапчасти, техника',where:'Taobao и 闲鱼 (б/у)',ship:'уточняю для каждой вещи',note:'Нужен номер детали или фото этикетки. Технику с аккумулятором проверяю у перевозчика до покупки.',tab:'taobao'},
+ {k:'Не знаю, где искать',where:'пришлите фото',ship:'подскажу по весу',note:'Подойдёт скрин с Wildberries, Ozon или Pinterest. Найду похожее в Китае по фото.',tab:'none'}
+];
+const pick=$('#pick'),pickOut=$('#pickOut');
+PICKS.forEach((p,i)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=p.k;b.setAttribute('aria-pressed',i===0);b.addEventListener('click',()=>selectPick(i));pick.appendChild(b);});
+function selectPick(i){
+  [...pick.children].forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
+  const p=PICKS[i];
+  const shipCls=/карго/.test(p.ship)&&!/белой/.test(p.ship)?'pill-cg':/белая/.test(p.ship)?'pill-wd':'pill-tape';
+  pickOut.innerHTML='<div class="pick-grid"><div><span class="k">Где брать</span><div class="v">'+p.where.replace(/闲鱼/,'<span class="hz">闲鱼</span>')+'</div></div><div><span class="k">Как везти</span><div><span class="pill '+shipCls+'">'+p.ship+'</span></div></div></div><p class="small">'+p.note+'</p><div><button type="button" class="btn btn-sm" id="pickGo">Как смотреть: '+TABNAME[p.tab]+'</button></div>';
+  $('#pickGo').addEventListener('click',()=>{selectTab(p.tab);document.getElementById('tabs').scrollIntoView({block:'start'});});
+}
+
+/* ---------- marketplace tabs ---------- */
+const TABS=[
+ {id:'poizon',name:'Poizon',hz:'得物',rows:[
+  ['Что там','Брендовые оригиналы: кроссовки, одежда, сумки, косметика, духи. Перед отправкой каждую вещь проверяют на подлинность.'],
+  ['Когда брать','Нужна конкретная модель известного бренда.'],
+  ['Как смотреть','В России есть приложение POIZON в App Store, Google Play и RuStore. Найдите модель, выберите размер и сделайте скрин, где видно название. Я найду её в китайской версии <span class="hz">得物</span> и посчитаю цену.'],
+  ['Как прислать','Скрин карточки товара с названием и размером.']],
+  tip:'Цены на Poizon меняются каждый день. Перед оплатой подтверждаю актуальную.'},
+ {id:'taobao',name:'Taobao',hz:'淘宝',rows:[
+  ['Что там','Самый большой выбор: обычная одежда, обувь, сумки, вещи для дома и детей. У многих товаров есть фото и видео от покупателей.'],
+  ['Когда брать','Нужна хорошая вещь без привязки к бренду.'],
+  ['Как смотреть','Приложение Taobao есть в App Store и Google Play. После регистрации по номеру телефона или почте можно включить русский язык. Ищите по фото через значок камеры в строке поиска или словами из словарика.'],
+  ['Как прислать','В карточке товара нажмите «Поделиться», затем «Скопировать ссылку», и отправьте мне. Китайский текст вокруг ссылки не мешает.']],
+  warn:'Известный бренд по цене масс-маркета на Taobao почти всегда не оригинал. За оригиналом идём на Poizon.'},
+ {id:'pdd',name:'Pinduoduo',hz:'拼多多',rows:[
+  ['Что там','Самые низкие цены: мелочи, дом, базовая одежда, аксессуары.'],
+  ['Когда брать','Недорогие повседневные вещи и мелочь.'],
+  ['Как смотреть','Приложение на китайском и часто просит китайский номер телефона. Если зарегистрироваться не получится, пришлите фото или скрин из любого магазина, найду похожее сам.'],
+  ['Как прислать','Ссылка из «Поделиться» или скрин карточки.']],
+  tip:'Качество бывает очень разным. Перед покупкой я смотрю фото покупателей и число продаж.'},
+ {id:'1688',name:'1688',hz:'阿里巴巴',rows:[
+  ['Что там','Оптовая площадка, товары напрямую от фабрик.'],
+  ['Когда брать','Нужно много одинакового: от 10–20 штук, мерч, подарки для коллег.'],
+  ['Как смотреть','Сайт и приложение только на китайском. Напишите, что нужно и сколько штук, я поищу фабрику.'],
+  ['Как прислать','Описание, фото образца и нужное количество.']],
+  tip:'У большинства товаров есть минимальная партия, и такие заказы едут карго.'},
+ {id:'none',name:'Без приложений',hz:'拍照',rows:[
+  ['Как','Ничего скачивать не обязательно. Пришлите фото вещи, скрин из любого магазина или ссылку. Я ищу в Китае по фото, это быстро.'],
+  ['Что написать','Размер, цвет, количество и на какую сумму рассчитываете.']],
+  tip:'Подходят скрины с Wildberries, Ozon, Pinterest, из Instagram и фото вещи у подруги.'}
+];
+const TABNAME={};TABS.forEach(t=>TABNAME[t.id]=t.name);
+const tabsEl=$('#tabs'),panelsEl=$('#panels');
+TABS.forEach(t=>{
+  const b=document.createElement('button');b.type='button';b.className='tab';b.id='tab-'+t.id;b.setAttribute('role','tab');b.setAttribute('aria-controls','panel-'+t.id);
+  b.innerHTML=t.name+' <span class="hz">'+t.hz+'</span>';b.addEventListener('click',()=>selectTab(t.id));tabsEl.appendChild(b);
+  const p=document.createElement('div');p.className='panel';p.id='panel-'+t.id;p.setAttribute('role','tabpanel');p.setAttribute('aria-labelledby','tab-'+t.id);
+  p.innerHTML='<dl class="rows">'+t.rows.map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('')+'</dl>'+(t.warn?'<p class="warn">'+t.warn+'</p>':'')+(t.tip?'<p class="tip">'+t.tip+'</p>':'');
+  panelsEl.appendChild(p);
+});
+function selectTab(id){
+  TABS.forEach(t=>{const on=t.id===id;$('#tab-'+t.id).setAttribute('aria-selected',on);$('#tab-'+t.id).tabIndex=on?0:-1;$('#panel-'+t.id).hidden=!on;});
+}
+tabsEl.addEventListener('keydown',e=>{
+  if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;
+  const ids=TABS.map(t=>t.id);const cur=ids.findIndex(id=>$('#tab-'+id).getAttribute('aria-selected')==='true');
+  const nx=ids[(cur+(e.key==='ArrowRight'?1:ids.length-1))%ids.length];selectTab(nx);$('#tab-'+nx).focus();
+});
+selectTab('poizon');selectPick(0);
+
+/* ---------- dictionary ---------- */
+const CATS=['Все','Одежда','Обувь и сумки','Дом и дети','Уточнения'];
+const W=[
+ ['卫衣','худи, свитшот','Одежда'],['毛衣','свитер','Одежда'],['针织开衫','кардиган','Одежда'],['T恤','футболка','Одежда'],['衬衫','рубашка','Одежда'],
+ ['外套','куртка, верхняя одежда','Одежда'],['羽绒服','пуховик','Одежда'],['大衣','пальто','Одежда'],['冲锋衣','ветровка-штормовка','Одежда'],['连衣裙','платье','Одежда'],
+ ['半身裙','юбка','Одежда'],['牛仔裤','джинсы','Одежда'],['运动裤','спортивные штаны','Одежда'],['阔腿裤','широкие брюки','Одежда'],['西装','пиджак, костюм','Одежда'],
+ ['运动套装','спортивный костюм','Одежда'],['睡衣','пижама','Одежда'],['袜子','носки','Одежда'],
+ ['运动鞋','кроссовки','Обувь и сумки'],['靴子','сапоги, ботинки','Обувь и сумки'],['雪地靴','угги','Обувь и сумки'],['拖鞋','тапочки','Обувь и сумки'],
+ ['女包','женская сумка','Обувь и сумки'],['双肩包','рюкзак','Обувь и сумки'],['钱包','кошелёк','Обувь и сумки'],
+ ['童装','детская одежда','Дом и дети'],['四件套','комплект постельного','Дом и дети'],['收纳','хранение, органайзеры','Дом и дети'],['玩具','игрушки','Дом и дети'],['毛巾','полотенце','Дом и дети'],
+ ['女','женское','Уточнения'],['男','мужское','Уточнения'],['大码','большие размеры','Уточнения'],['加绒','с начёсом','Уточнения'],['加厚','утеплённое','Уточнения'],
+ ['纯棉','100% хлопок','Уточнения'],['宽松','свободный крой','Уточнения'],['秋冬','осень-зима','Уточнения'],['春夏','весна-лето','Уточнения'],['同款','такая же модель, как на фото','Уточнения']
+];
+const COMBOS=[['女 卫衣 加绒','женское худи с начёсом'],['男 羽绒服 加厚','мужской тёплый пуховик'],['女 牛仔裤 阔腿','женские широкие джинсы'],['童装 秋冬','детская одежда на осень-зиму']];
+const combos=$('#combos');
+COMBOS.forEach(c=>{const b=document.createElement('button');b.type='button';b.innerHTML='<span class="hz">'+c[0]+'</span><br><span class="small muted">'+c[1]+'</span>';b.addEventListener('click',()=>flashCopy(b,c[0]));combos.appendChild(b);});
+const df=$('#dictFilter'),dict=$('#dict');let cat='Все';
+CATS.forEach(c=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=c;b.setAttribute('aria-pressed',c===cat);b.addEventListener('click',()=>{cat=c;[...df.children].forEach(x=>x.setAttribute('aria-pressed',x.textContent===c));renderDict();});df.appendChild(b);});
+function renderDict(){
+  dict.innerHTML='';
+  W.filter(w=>cat==='Все'||w[2]===cat).forEach(w=>{const b=document.createElement('button');b.type='button';b.className='word';b.setAttribute('aria-label','Скопировать '+w[0]+', '+w[1]);b.innerHTML='<span class="hz">'+w[0]+'</span><span>'+w[1]+'</span>';b.addEventListener('click',()=>flashCopy(b,w[0]));dict.appendChild(b);});
+}
+function flashCopy(el,text){copyText(text).then(ok=>{if(!ok)return;el.classList.add('ok');setTimeout(()=>el.classList.remove('ok'),1400);});}
+renderDict();
+
+/* ---------- calculator ---------- */
+const USD=84.90, WD_KG=680, WD_MIN=0.3, DOM_LO=500, DOM_HI=1500, CG_MIN=10, PLACE_FEE=600, PACK=270, PLACE_KG=30;
+const ITEMS=[
+ {name:'Футболка',kg:.25,n:3},{name:'Худи, свитшот',kg:.7,n:2},{name:'Джинсы, брюки',kg:.7,n:2},{name:'Платье',kg:.4,n:0},
+ {name:'Куртка, пуховик',kg:1.3,n:0},{name:'Кроссовки в коробке',kg:1.4,n:1},{name:'Сумка',kg:.8,n:0},
+ {name:'Мелочь для дома',kg:.3,n:0},{name:'Крем, косметика',kg:.2,n:0,cosm:true}
+];
+const itemsEl=$('#items');let touched=false;
+ITEMS.forEach((it,i)=>{
+  const row=document.createElement('div');row.className='it';
+  row.innerHTML='<div class="it-name">'+it.name+'<small>≈ '+String(it.kg).replace('.',',')+' кг</small></div><div class="step"><button type="button" aria-label="Убрать: '+it.name+'">−</button><output id="n'+i+'">'+it.n+'</output><button type="button" aria-label="Добавить: '+it.name+'">+</button></div>';
+  const [minus,plus]=row.querySelectorAll('button');
+  minus.addEventListener('click',()=>{it.n=Math.max(0,it.n-1);touched=true;calc();});
+  plus.addEventListener('click',()=>{it.n=Math.min(99,it.n+1);touched=true;calc();});
+  itemsEl.appendChild(row);
+});
+$('#brand').addEventListener('change',()=>{touched=true;calc();});
+function costWd(w){const intl=Math.max(w,WD_MIN)*WD_KG;return{intl,lo:intl+DOM_LO,hi:intl+DOM_HI,mid:intl+(DOM_LO+DOM_HI)/2};}
+function places(w){return Math.max(1,Math.ceil(w/PLACE_KG));}
+function costCg(w,brand){const r=brand?3.5:3.0;const billed=Math.max(w,CG_MIN);return{billed,r,pl:places(w),total:billed*r*USD+places(w)*(PLACE_FEE+PACK)};}
+function calc(){
+  ITEMS.forEach((it,i)=>$('#n'+i).textContent=it.n);
+  const w=ITEMS.reduce((s,it)=>s+it.n*it.kg,0);const cnt=ITEMS.reduce((s,it)=>s+it.n,0);
+  const cosm=ITEMS.some(it=>it.cosm&&it.n>0);const brand=$('#brand').checked;
+  $('#calcBadge').textContent=touched?'ваш заказ':'пример заказа';
+  $('#wOut').textContent=(Math.round(w*10)/10).toString().replace('.',',')+' кг';
+  if(cnt===0){$('#wdSum').textContent='—';$('#cgSum').textContent='—';$('#wdSub').textContent='';$('#cgSub').textContent='';$('#verdict').textContent='Добавьте вещи, чтобы сравнить.';drawChart(0,brand);return;}
+  const a=costWd(w),b=costCg(w,brand);
+  $('#wdSum').textContent=rub(a.lo)+' – '+rub(a.hi);
+  $('#wdSub').textContent='в Китае ≈ '+rub(a.intl)+', по России 500–1\u00a0500 ₽';
+  $('#cgSum').textContent='≈ '+rub(b.total);
+  $('#cgSub').textContent=(w<CG_MIN?'платите за минимум 10 кг':'за '+String(Math.round(w*10)/10).replace('.',',')+' кг')+' · '+b.pl+(b.pl===1?' место':' места')+' · самовывоз в Москве';
+  const ratio=a.mid/b.total;let v;
+  if(ratio>1.3)v='Выгоднее карго, примерно в '+String(Math.round(ratio*10)/10).replace('.',',')+' раза. Если вы не в Москве, добавится пересылка.';
+  else if(ratio<0.77)v='Выгоднее белая доставка. Карго на таком весе невыгодно из-за минимума 10 кг.';
+  else v='Примерно одинаково. Белая доставка привезёт в ваш город, карго нужно забирать в Москве. Мелкий заказ можно добавить в сборную посылку.';
+  if(cosm)v+=' Косметику отправляем белой доставкой.';
+  $('#verdict').textContent=v;
+  drawChart(w,brand);
+}
+function drawChart(w,brand){
+  const svg=$('#chart');const X0=46,X1=350,Y0=180,Y1=12,XM=30,YM=22500;
+  const sx=k=>X0+(k/XM)*(X1-X0),sy=r=>Y0-(r/YM)*(Y0-Y1);
+  let h='';
+  [0,5000,10000,15000,20000].forEach(t=>{h+='<line class="grid" x1="'+X0+'" x2="'+X1+'" y1="'+sy(t)+'" y2="'+sy(t)+'"/><text class="ax" x="'+(X0-6)+'" y="'+(sy(t)+3)+'" text-anchor="end">'+(t?t/1000+' тыс':'0')+'</text>';});
+  [0,5,10,15,20,25,30].forEach(t=>{h+='<text class="ax" x="'+sx(t)+'" y="'+(Y0+15)+'" text-anchor="middle">'+t+'</text>';});
+  h+='<text class="ax" x="'+X1+'" y="'+(Y0+30)+'" text-anchor="end">вес заказа, кг</text>';
+  const ks=[];for(let k=0.5;k<=XM+1e-9;k+=0.5)ks.push(k);
+  const hiPts=ks.map(k=>sx(k)+','+sy(costWd(k).hi)),loPts=ks.slice().reverse().map(k=>sx(k)+','+sy(costWd(k).lo));
+  h+='<polygon class="b-wd" points="'+hiPts.concat(loPts).join(' ')+'"/>';
+  h+='<polyline class="l-wd" points="'+ks.map(k=>sx(k)+','+sy(costWd(k).mid)).join(' ')+'"/>';
+  h+='<polyline class="l-cg" points="'+ks.map(k=>sx(k)+','+sy(costCg(k,brand).total)).join(' ')+'"/>';
+  if(w>0){const wx=sx(Math.min(w,XM));h+='<line class="mark" x1="'+wx+'" x2="'+wx+'" y1="'+Y1+'" y2="'+Y0+'"/><text class="mark-t" x="'+Math.min(Math.max(wx,X0+20),X1-20)+'" y="'+(Y1+2)+'" text-anchor="middle">'+(w>XM?'> 30':String(Math.round(w*10)/10).replace('.',','))+' кг</text>';}
+  svg.innerHTML=h;
+}
+calc();
+
+/* ---------- order builder ---------- */
+const F=['o-what','o-size','o-qty','o-city','o-ship','o-date','o-name'];
+const SAMPLE={'o-what':'Худи серое, ссылка с Taobao\nКроссовки New Balance 530, скрин с Poizon','o-size':'худи M, серое; кроссовки 39 EU','o-qty':'по 1 шт.','o-city':'Электросталь','o-ship':'Подскажите, что выгоднее','o-date':'не срочно','o-name':'Светлана'};
+function val(id){return document.getElementById(id).value.trim();}
+function build(){
+  const empty=F.filter(id=>id!=='o-ship').every(id=>!val(id));
+  const g=id=>empty?SAMPLE[id]:val(id);
+  const lines=['Здравствуйте! Хочу заказать из Китая.',''];
+  const what=g('o-what');if(what){lines.push('Что:');what.split('\n').map(s=>s.trim()).filter(Boolean).forEach((s,i)=>lines.push((i+1)+') '+s));}
+  if(g('o-size'))lines.push('Размер, цвет: '+g('o-size'));
+  if(g('o-qty'))lines.push('Количество: '+g('o-qty'));
+  if(g('o-city'))lines.push('Город: '+g('o-city'));
+  lines.push('Доставка: '+(empty?SAMPLE['o-ship']:val('o-ship')));
+  if(g('o-date'))lines.push('Когда нужно: '+g('o-date'));
+  if(g('o-name')){lines.push('');lines.push(g('o-name'));}
+  $('#pvText').textContent=lines.join('\n');$('#pvBadge').textContent=empty?'пример':'ваша заявка';
+  return{text:lines.join('\n'),empty};
+}
+try{const saved=JSON.parse(localStorage.getItem('cn-order')||'{}');F.forEach(id=>{if(saved[id])document.getElementById(id).value=saved[id];});}catch(e){}
+F.forEach(id=>document.getElementById(id).addEventListener('input',()=>{build();try{const o={};F.forEach(i=>o[i]=document.getElementById(i).value);localStorage.setItem('cn-order',JSON.stringify(o));}catch(e){}}));
+$('#orderForm').addEventListener('submit',e=>e.preventDefault());
+$('#copyOrder').addEventListener('click',()=>{
+  const r=build();
+  if(r.empty){$('#copyStatus').textContent='Сначала заполните хотя бы одно поле, сейчас показан пример.';return;}
+  copyText(r.text).then(ok=>{$('#copyStatus').textContent=ok?'Скопировано. Откройте Telegram и вставьте текст.':'Не получилось скопировать. Выделите текст выше и скопируйте вручную.';});
+});
+$('#clearOrder').addEventListener('click',()=>{F.forEach(id=>{const el=document.getElementById(id);el.value=el.tagName==='SELECT'?el.options[0].value:'';});try{localStorage.removeItem('cn-order');}catch(e){}$('#copyStatus').textContent='';build();});
+build();
+})();
+</script>
+
+</body>
+</html>
